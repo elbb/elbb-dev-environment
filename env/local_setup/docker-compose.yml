@@ -37,3 +37,17 @@ services:
   registry:
     image: registry:2
     ports: ["5000:5000"]
+
+  minio:
+    image: minio/minio:latest
+    ports: ["9000:9000"]
+    tty: true
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: localaccess
+      MINIO_SECRET_KEY: localsecret
+    volumes:
+      - minio-volume:/data    
+
+volumes:
+  minio-volume:
