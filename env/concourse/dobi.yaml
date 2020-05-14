@@ -1,0 +1,9 @@
+# ===================================================
+# compose
+# ===================================================
+
+compose=concourseenv:
+    files: [env/concourse/docker-compose.yml]
+    project: 'env-concourse'
+    annotations:
+        description: "-> start local concourse environment"    
