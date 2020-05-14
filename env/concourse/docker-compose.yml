@@ -7,7 +7,7 @@ services:
       POSTGRES_DB: concourse
       POSTGRES_PASSWORD: concourse_pass
       POSTGRES_USER: concourse_user
-      PGDATA: /database
+      PGDATA: ./concourse-db
 
   concourse:
     image: concourse/concourse
@@ -32,7 +32,7 @@ services:
     image: cirocosta/gitserver-http:latest
     ports: ["8081:80"]
     volumes:
-      - ./repositories:/var/lib/git
+      - ./git-repositories:/var/lib/git
 
   registry:
     image: registry:2
@@ -47,7 +47,4 @@ services:
       MINIO_ACCESS_KEY: localaccess
       MINIO_SECRET_KEY: localsecret
     volumes:
-      - minio-volume:/data    
-
-volumes:
-  minio-volume:
+      - ./minio-data:/data    

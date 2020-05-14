@@ -7,6 +7,7 @@ meta:
   include:
   - dobi.yaml
   - version.yaml
+  - env/concourse/dobi.yaml
 
 # ===================================================
 # alias
