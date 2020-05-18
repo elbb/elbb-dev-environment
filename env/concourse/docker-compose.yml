@@ -7,7 +7,9 @@ services:
       POSTGRES_DB: concourse
       POSTGRES_PASSWORD: concourse_pass
       POSTGRES_USER: concourse_user
-      PGDATA: ./concourse-db
+      PGDATA: /database
+    volumes: 
+      - concourse-db-data:/database
 
   concourse:
     image: concourse/concourse
@@ -48,3 +50,7 @@ services:
       MINIO_SECRET_KEY: localsecret
     volumes:
       - ./minio-data:/data    
+
+volumes: 
+  concourse-db-data:
+    driver: local
