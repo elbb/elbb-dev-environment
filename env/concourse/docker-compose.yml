@@ -1,4 +1,4 @@
-version: "3"
+version: "3.4"
 
 services:
   concourse-db:
@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: concourse_pass
       POSTGRES_USER: concourse_user
       PGDATA: /database
-    volumes: 
+    volumes:
       - concourse-db-data:/database
 
   concourse:
@@ -49,8 +49,9 @@ services:
       MINIO_ACCESS_KEY: localaccess
       MINIO_SECRET_KEY: localsecret
     volumes:
-      - ./minio-data:/data    
+      - ./minio-data:/data
 
-volumes: 
+volumes:
   concourse-db-data:
-    driver: local
+    name: "${PROJECT}_${CONCOURSEDBDATA}"
+    external: false
