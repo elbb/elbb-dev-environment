@@ -8,6 +8,14 @@ mount=mount-concourse-db:
     name: "{env.PROJECT}_{env.CONCOURSEDBDATA}"
     path: /unused
 
+mount=mount-minio-data:
+    name: "{env.PROJECT}_{env.MINIODATA}"
+    path: /unused
+
+mount=mount-registry-data:
+    name: "{env.PROJECT}_{env.REGISTRYDATA}"
+    path: /unused
+
 mount=mount-git-repositories:
     bind: env/concourse/git-repositories
     path: /bind/git-repositories
@@ -18,8 +26,6 @@ mount=mount-git-repositories:
 compose=concourseenv:
     files: [env/concourse/docker-compose.yml]
     project: "{env.PROJECT}"
-    annotations:
-        description: "-> start local concourse environment"
 
 # ===================================================
 # images
@@ -58,5 +64,7 @@ alias=clean:
     tasks:
         - clean-bind-mounts
         - mount-concourse-db:rm
+        - mount-minio-data:rm
+        - mount-registry-data:rm
     annotations:
         description: "[alias] clean concourse"
