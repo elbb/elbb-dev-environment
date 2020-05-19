@@ -5,8 +5,9 @@
 meta:
   project: bb-buildingblock
   include:
-  - dobi.yaml
-  - version.yaml
+    - dobi.yaml
+    - version.yaml
+    - env/concourse/dobi.yaml
 
 # ===================================================
 # alias
@@ -14,24 +15,24 @@ meta:
 
 alias=version:
   tasks:
-  - bb-buildingblock-version
+    - bb-buildingblock-version
   annotations:
     description: "[alias] bb-buildingblock-version"
 
 alias=build:
   tasks:
-  - bb-buildingblock-build
+    - bb-buildingblock-build
   annotations:
     description: "[alias] bb-buildingblock-build"
-  
+
 alias=deploy:
   tasks:
-  - bb-buildingblock-deploy
+    - bb-buildingblock-deploy
   annotations:
     description: "[alias] bb-buildingblock-deploy"
-  
-alias=test: 
+
+alias=test:
   tasks:
-  - bb-buildingblock-test
-  annotations: 
+    - bb-buildingblock-test
+  annotations:
     description: "[alias] bb-buildingblock-test"

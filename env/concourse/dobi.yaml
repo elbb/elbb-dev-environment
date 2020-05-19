@@ -1,0 +1,62 @@
+# ===================================================
+# mounts
+# ===================================================
+# Note: this mount is used by dobi only to delete the volume.
+# It never gets used by a dobi job.
+# Therefore the path is set to `/unused`
+mount=mount-concourse-db:
+    name: "{env.PROJECT}_{env.CONCOURSEDBDATA}"
+    path: /unused
+
+mount=mount-git-repositories:
+    bind: env/concourse/git-repositories
+    path: /bind/git-repositories
+
+# ===================================================
+# compose
+# ===================================================
+compose=concourseenv:
+    files: [env/concourse/docker-compose.yml]
+    project: "{env.PROJECT}"
+    annotations:
+        description: "-> start local concourse environment"
+
+# ===================================================
+# images
+# ===================================================
+image=image-bash:
+    image: bash
+    tags: ["5"]
+    pull: once
+
+# ===================================================
+# jobs
+# ===================================================
+job=clean-bind-mounts:
+    use: image-bash
+    command: sh -c "rm -rf /bind/git-repositories/*"
+    mounts:
+        - mount-git-repositories
+
+# ===================================================
+# alias
+# ===================================================
+
+alias=start:
+    tasks:
+        - concourseenv:detach
+    annotations:
+        description: "[alias] start concourse"
+
+alias=stop:
+    tasks:
+        - concourseenv:down
+    annotations:
+        description: "[alias] stop concourse"
+
+alias=clean:
+    tasks:
+        - clean-bind-mounts
+        - mount-concourse-db:rm
+    annotations:
+        description: "[alias] clean concourse"
