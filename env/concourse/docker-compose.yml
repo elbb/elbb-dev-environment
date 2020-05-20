@@ -28,7 +28,6 @@ services:
       CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
       CONCOURSE_CLIENT_SECRET: Y29uY291cnNlLXdlYgo=
       CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
-      CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
 
   git:
     image: cirocosta/gitserver-http:latest
