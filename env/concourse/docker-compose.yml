@@ -10,6 +10,8 @@ services:
       PGDATA: /database
     volumes:
       - concourse-db-data:/database
+    networks:  
+    - default
 
   concourse:
     image: concourse/concourse
@@ -28,12 +30,16 @@ services:
       CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
       CONCOURSE_CLIENT_SECRET: Y29uY291cnNlLXdlYgo=
       CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
+    networks:  
+    - default
 
   git:
     image: cirocosta/gitserver-http:latest
     ports: ["8081:80"]
     volumes:
       - ./git-repositories:/var/lib/git
+    networks:  
+    - default
 
   registry:
     image: registry:2
@@ -42,6 +48,8 @@ services:
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
     volumes:
       - registry-data:/data    
+    networks:  
+    - default
 
   minio:
     image: minio/minio:latest
@@ -53,6 +61,8 @@ services:
       MINIO_SECRET_KEY: localsecret
     volumes:
       - minio-data:/data
+    networks:  
+    - default
 
 volumes:
   concourse-db-data:
@@ -66,3 +76,6 @@ volumes:
   registry-data:
     name: "${PROJECT}_${REGISTRYDATA}"
     external: false    
+
+networks:
+  default:

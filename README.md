@@ -21,7 +21,7 @@ The separation between meta.yaml and dobi.yaml is necessary to integrate the bui
 
 Version informations are generated automatically from git history by using building block bb-gitversion (<https://github.com/elbb/bb-gitversion>).
 
-## Using local CI Toolchain
+## Overview local CI Toolchain
 
 In this environment there is a local CI toolchain that can be used for development purposes. 
 This toolchain contains a Concourse Server, a Git Server, a Docker Registry and a MinIO Server. 
@@ -45,6 +45,60 @@ To set a CI toolchain to the default state, this can also be done with dobi.
 ```sh
 ./dobi.sh clean  "clean CI Toolchain"
 ```
+
+### Using local CI Toolchain
+
+After the toolchain was started via dobi, the individual components can be used.
+
+#### Concourse-Server
+
+The Concourse server can be reached via the following address in the browser: http://localhost:8080/
+
+#### Git-Server
+
+The git server manages its repositories in the projects folder "env/concourse/git-repositories".
+
+The following small example should explain how it works:
+
+initialize a bare repository:
+
+```sh
+cd env/concourse/git-repositories
+git init --bare myrepo.git
+```
+
+and then, just clone it somewhere else:
+
+```sh
+cd /tmp
+git clone http://localhost:8081/myrepo.git
+cd myrepo
+```
+
+#### MinIO-Server
+
+A good starting point to work with the MinIO-Server, please read the offical documentation.
+
+https://github.com/minio/minio#explore-further
+
+#### Docker-Registry
+
+The local Docker Server can be used as follows.
+A small example explains the sequence.
+
+First we get an official image of the "bash" from Docker Hub.
+
+```sh
+docker pull bash:latest
+```
+
+Then we generate a Test-Tag and push it to our local server.
+
+```sh
+docker tag bash:latest localhost:5000/test_bash
+docker push localhost:5000/test_bash
+```
+
 
 # What is embedded linux building blocks
 
