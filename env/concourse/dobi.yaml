@@ -52,19 +52,20 @@ alias=start:
     tasks:
         - concourseenv:detach
     annotations:
-        description: "[alias] start concourse"
+        description: "[alias] start the concourse environment"
 
 alias=stop:
     tasks:
         - concourseenv:down
     annotations:
-        description: "[alias] stop concourse"
+        description: "[alias] stop the concourse environment"
 
 alias=clean:
     tasks:
+        - stop
         - clean-bind-mounts
         - mount-concourse-db:rm
         - mount-minio-data:rm
         - mount-registry-data:rm
     annotations:
-        description: "[alias] clean concourse"
+        description: "[alias] clean the concourse environment"
