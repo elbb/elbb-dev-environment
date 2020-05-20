@@ -21,6 +21,31 @@ The separation between meta.yaml and dobi.yaml is necessary to integrate the bui
 
 Version informations are generated automatically from git history by using building block bb-gitversion (<https://github.com/elbb/bb-gitversion>).
 
+## Using local CI Toolchain
+
+In this environment there is a local CI toolchain that can be used for development purposes. 
+This toolchain contains a Concourse Server, a Git Server, a Docker Registry and a MinIO Server. 
+
+The environment can be started using dobi.
+
+```sh
+./dobi.sh start  "start CI Toolchain"
+```
+
+The environment can also be stopped using dobi.
+
+```sh
+./dobi.sh stop  "stop CI Toolchain"
+```
+
+When the environment is started, local folders are created and used for the Concourse Server, Docker Registry, Git Server and MinIO Server services. This has the advantage that the history is kept after a restart of the CI toolchain.
+
+To set a CI toolchain to the default state, this can also be done with dobi.
+
+```sh
+./dobi.sh clean  "clean CI Toolchain"
+```
+
 # What is embedded linux building blocks
 
 embedded linux building blocks is a project to create reusable and
