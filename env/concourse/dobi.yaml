@@ -23,7 +23,7 @@ mount=mount-git-repositories:
 # ===================================================
 # compose
 # ===================================================
-compose=concourseenv:
+compose=dev-env-concourse:
     files: [env/concourse/docker-compose.yml]
     project: "{env.PROJECT}"
 
@@ -48,21 +48,21 @@ job=clean-bind-mounts:
 # alias
 # ===================================================
 
-alias=start:
+alias=dev-environment-concourse-start:
     tasks:
-        - concourseenv:detach
+        - dev-env-concourse:detach
     annotations:
         description: "[alias] start the concourse environment"
 
-alias=stop:
+alias=dev-environment-concourse-stop:
     tasks:
-        - concourseenv:down
+        - dev-env-concourse:down
     annotations:
         description: "[alias] stop the concourse environment"
 
-alias=clean:
+alias=dev-environment-concourse-clean:
     tasks:
-        - stop
+        - dev-environment-concourse-stop
         - clean-bind-mounts
         - mount-concourse-db:rm
         - mount-minio-data:rm

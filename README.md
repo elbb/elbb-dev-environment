@@ -1,62 +1,70 @@
 <img src="https://raw.githubusercontent.com/elbb/bb-buildingblock/master/.assets/logo.png" height="200">
 
-# embedded linux building block template
+# Local development environment
 
-This code serves as a template for the creation of further building blocks with the purpose of giving all blocks a uniform structure and usage.
+The next section describes the supported environments in detail.
 
-## using dobi for local build
+## Local Concourse environment
 
-dobi should only be used via the `dobi.sh` script, because there important variables are set and the right scripts are included.
-
-By default three dobi resources are predefined (but not implemented):
-
-```sh
-./dobi.sh build  # build the buildingblock
-./dobi.sh test   # run all tests
-./dobi.sh deploy # deploy the buildingblock
-```
-
-These point to the resources defined in dobi.yaml.
-The separation between meta.yaml and dobi.yaml is necessary to integrate the building block into another building block via dobi.
-
-Version informations are generated automatically from git history by using building block bb-gitversion (<https://github.com/elbb/bb-gitversion>).
-
-## Overview local CI Toolchain
-
-In this environment there is a local CI toolchain that can be used for development purposes. 
-This toolchain contains a Concourse Server, a Git Server, a Docker Registry and a MinIO Server. 
+In this development toolset, there is a local Concourse environment that can be used for development purposes.
+This environment contains a Concourse Server, a Git Server, a Docker Registry and a MinIO Server.
 
 The environment can be started using dobi.
 
 ```sh
-./dobi.sh start  "start CI Toolchain"
+./dobi.sh dev-environment-concourse-start  # start the concourse environment
 ```
 
 The environment can also be stopped using dobi.
 
 ```sh
-./dobi.sh stop  "stop CI Toolchain"
+./dobi.sh dev-environment-concourse-stop  # stop the concourse environment
 ```
 
-When the environment is started, local folders are created and used for the Concourse Server, Docker Registry, Git Server and MinIO Server services. This has the advantage that the history is kept after a restart of the CI toolchain.
+When the environment is started, a local folder for the Git-Server and "named volumes" for Concourse-DB, MinIO and Docker-Registry are created and used by these services. This has the advantage, that the history is kept after a restart of the concourse environment.
 
-To set a CI toolchain to the default state, this can also be done with dobi.
+To set a concourse environment to the default state, this can also be done with dobi.
 
 ```sh
-./dobi.sh clean  "clean CI Toolchain"
+./dobi.sh dev-environment-concourse-clean  # clean the concourse environment
 ```
 
-### Using local CI Toolchain
+### Concourse-Server
 
-After the toolchain was started via dobi, the individual components can be used.
+#### General
 
-#### Concourse-Server
+This environment has a local instance of a Concourse-Server.
+We are using the following docker image:
+- https://hub.docker.com/r/concourse/concourse
 
-The Concourse server can be reached via the following address in the browser: http://localhost:8080/
+#### Usage
 
-#### Git-Server
+The Concourse server can be reached via your local browser.
+
+- Address: localhost
+- Port: 8080
+- User Name: test
+- User PW: test
+
+#### Example
+
+http://localhost:8080/
+
+### Git-Server
+
+#### General
 
 The git server manages its repositories in the projects folder "env/concourse/git-repositories".
+
+We are using the following docker image:
+- https://hub.docker.com/r/cirocosta/gitserver-http
+
+#### Usage
+
+- Address: localhost
+- Port: 8081
+
+#### Example
 
 The following small example should explain how it works:
 
@@ -75,15 +83,41 @@ git clone http://localhost:8081/myrepo.git
 cd myrepo
 ```
 
-#### MinIO-Server
+### MinIO-Server
+
+#### General
 
 A good starting point to work with the MinIO-Server, please read the offical documentation.
-
 https://github.com/minio/minio#explore-further
 
-#### Docker-Registry
+We are using the following docker image:
+- https://hub.docker.com/r/minio/minio
 
-The local Docker Server can be used as follows.
+#### Usage
+
+- Address: localhost
+- Port: 9000
+- MinIO Access Key: localaccess
+- Minio Secret Key: localsecret
+
+#### Example
+
+ - tbd.
+
+### Docker-Registry
+
+#### General
+
+We are using the following docker image:
+- https://hub.docker.com/_/registry
+
+#### Usage
+
+- Address: localhost
+- Port: 5000
+
+#### Example
+
 A small example explains the sequence.
 
 First we get an official image of the "bash" from Docker Hub.
@@ -98,13 +132,6 @@ Then we generate a Test-Tag and push it to our local server.
 docker tag bash:latest localhost:5000/test_bash
 docker push localhost:5000/test_bash
 ```
-
-
-# What is embedded linux building blocks
-
-embedded linux building blocks is a project to create reusable and
-adoptable blueprints for highly recurrent issues in building an internet
-connected embedded linux system.
 
 # License
 
