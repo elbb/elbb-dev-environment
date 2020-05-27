@@ -105,6 +105,8 @@ The following docker image is used:
 - MinIO Access Key: localaccess
 - Minio Secret Key: localsecret
 
+[http://localhost:9000](http://localhost:9000)
+
 #### Example
 
 A good starting point to work with the MinIO server, please read the offical documentation.
@@ -140,6 +142,24 @@ Then we generate a Test-Tag and push it to our local server.
 docker tag bash:latest localhost:5000/test_bash
 docker push localhost:5000/test_bash
 ```
+
+To check if the created image is available in the local registry, the registry-cleanup tool can be used.
+
+Notes on operation:
+
+```sh
+docker run --rm -it elbb/registry-cleanup -help
+```
+
+Access to the local docker registry using :
+
+```sh
+docker run --rm -it elbb/registry-cleanup -address http://localhost:5000
+```
+
+##### Hint:
+
+Instead of localhost, the IP address of the concourse CI environment must be entered if the connection is faulty.
 
 # License
 
