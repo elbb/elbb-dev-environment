@@ -36,12 +36,10 @@ To set a concourse environment to the default state, this can also be done with 
 This environment has a local instance of a concourse CI server.
 
 The following docker image is used:
-- Image: concourse/concourse
-- Tag: 6.1.0
+- concourse/concourse:6.1.0
 
 For the database, the following docker image is used:
-- Image: postgres
-- Tag: 13
+- postgres:13
 
 #### Usage
 
@@ -65,8 +63,7 @@ A local git server is located in this environment. This can be used for local ve
 The git server manages its repositories in the projects folder "env/concourse/git-repositories".
 
 The following docker image is used:
-- Image: cirocosta/gitserver-http
-- Tag: latest
+- cirocosta/gitserver-http:latest
 
 #### Usage
 
@@ -99,8 +96,7 @@ cd myrepo
 Minio is an object storage server that contains the same public API as Amazon S3. This means that applications that can interact with Amazon S3, can be configured to interact with Minio in this local environment.
 
 The following docker image is used:
-- Image: minio/minio
-- Tag: RELEASE.2020-05-16T01-33-21Z
+- minio/minio:RELEASE.2020-05-16T01-33-21Z
 
 #### Usage
 
@@ -121,8 +117,7 @@ A good starting point to work with the MinIO server, please read the offical doc
 If you create your own docker images, you may also need a registry to manage them. The local registry is intended for the development phase, before the generated images are published on services like Docker Hub.
 
 The following docker image is used:
-- Image: registry
-- Tag: 2
+- registry:2
 
 #### Usage
 
