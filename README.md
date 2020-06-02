@@ -154,12 +154,9 @@ docker run --rm -it elbb/registry-cleanup -help
 Access to the local docker registry using :
 
 ```sh
-docker run --rm -it elbb/registry-cleanup -address http://DOCKER_HOST_IP_ADDRESS:5000
+DOCKER_HOST_IP=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
+docker run --rm -it elbb/registry-cleanup -address http://DOCKER_HOST_IP:5000
 ```
-
-##### Hint:
-
-Instead of DOCKER_HOST_IP_ADDRESS, the IP address of the concourse CI environment must be entered.
 
 # License
 
