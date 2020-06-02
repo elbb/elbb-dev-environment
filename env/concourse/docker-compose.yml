@@ -35,7 +35,7 @@ services:
       - default
 
   git:
-    image: cirocosta/gitserver-http
+    image: cirocosta/gitserver-http:latest
     ports: ["8081:80"]
     volumes:
       - ./git-repositories:/var/lib/git
