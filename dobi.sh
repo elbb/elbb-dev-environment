@@ -12,5 +12,10 @@ if [ -z ${1} ]; then
     exit 1
 fi
 
+# load and export concourse environment env file
+set -o allexport
+source env/concourse/local.env
+set +o allexport
+
 # execute dobi with meta as default
 exec dobi --filename meta.yaml ${@}

@@ -1,0 +1,71 @@
+# ===================================================
+# mounts
+# ===================================================
+# Note: this mount is used by dobi only to delete the volume.
+# It never gets used by a dobi job.
+# Therefore the path is set to `/unused`
+mount=mount-concourse-db:
+    name: "{env.PROJECT}_{env.CONCOURSEDBDATA}"
+    path: /unused
+
+mount=mount-minio-data:
+    name: "{env.PROJECT}_{env.MINIODATA}"
+    path: /unused
+
+mount=mount-registry-data:
+    name: "{env.PROJECT}_{env.REGISTRYDATA}"
+    path: /unused
+
+mount=mount-git-repositories:
+    bind: env/concourse/git-repositories
+    path: /bind/git-repositories
+
+# ===================================================
+# compose
+# ===================================================
+compose=dev-env-concourse:
+    files: [env/concourse/docker-compose.yml]
+    project: "{env.PROJECT}"
+
+# ===================================================
+# images
+# ===================================================
+image=image-bash:
+    image: bash
+    tags: ["5"]
+    pull: once
+
+# ===================================================
+# jobs
+# ===================================================
+job=clean-bind-mounts:
+    use: image-bash
+    command: sh -c "rm -rf /bind/git-repositories/*"
+    mounts:
+        - mount-git-repositories
+
+# ===================================================
+# alias
+# ===================================================
+
+alias=dev-environment-concourse-start:
+    tasks:
+        - dev-env-concourse:detach
+    annotations:
+        description: "[alias] start the concourse environment"
+
+alias=dev-environment-concourse-stop:
+    tasks:
+        - dev-env-concourse:down
+    annotations:
+        description: "[alias] stop the concourse environment"
+
+alias=dev-environment-concourse-clean:
+    tasks:
+        - dev-environment-concourse-stop
+        - clean-bind-mounts
+        - mount-concourse-db:rm
+        - mount-minio-data:rm
+        - mount-registry-data:rm
+    annotations:
+        description: "[alias] clean the concourse environment"

@@ -1,31 +1,162 @@
 <img src="https://raw.githubusercontent.com/elbb/bb-buildingblock/master/.assets/logo.png" height="200">
 
-# embedded linux building block template
+# Local development environment
 
-This code serves as a template for the creation of further building blocks with the purpose of giving all blocks a uniform structure and usage.
+The following section describes the supported environments in detail.
 
-## using dobi for local build
+## Local concourse CI environment
 
-dobi should only be used via the `dobi.sh` script, because there important variables are set and the right scripts are included.
+In this development toolset, there is a concourse CI environment that can be used for local development.
+This environment contains a concourse CI server, a git server, a docker registry and a MinIO server.
 
-By default three dobi resources are predefined (but not implemented):
+The environment can be started using dobi.
 
 ```sh
-./dobi.sh build  # build the buildingblock
-./dobi.sh test   # run all tests
-./dobi.sh deploy # deploy the buildingblock
+./dobi.sh dev-environment-concourse-start
 ```
 
-These point to the resources defined in dobi.yaml.
-The separation between meta.yaml and dobi.yaml is necessary to integrate the building block into another building block via dobi.
+The environment can also be stopped using dobi.
 
-Version informations are generated automatically from git history by using building block bb-gitversion (<https://github.com/elbb/bb-gitversion>).
+```sh
+./dobi.sh dev-environment-concourse-stop
+```
 
-# What is embedded linux building blocks
+When the environment is started, a local folder for the git server and docker volumes for concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the concourse environment.
 
-embedded linux building blocks is a project to create reusable and
-adoptable blueprints for highly recurrent issues in building an internet
-connected embedded linux system.
+To set a concourse environment to the default state, this can also be done with dobi.
+
+```sh
+./dobi.sh dev-environment-concourse-clean
+```
+
+### concourse CI server
+
+#### General
+
+This environment has a local instance of a concourse CI server.
+
+The following docker image is used:
+- concourse/concourse:6.1.0
+
+For the database, the following docker image is used:
+- postgres:13
+
+#### Usage
+
+The  concourse CI server can be reached via your local browser.
+
+- Address: localhost
+- Port: 8080
+- User Name: test
+- User PW: test
+
+#### Example
+
+[http://localhost:8080](http://localhost:8080)
+
+### git server
+
+#### General
+
+A local git server is located in this environment. This can be used for local version management. This means, that you don't have to upload your own code to a central server, such as GitHub during your development phase.
+
+The git server manages its repositories in the projects folder "env/concourse/git-repositories".
+
+The following docker image is used:
+- cirocosta/gitserver-http:latest
+
+#### Usage
+
+- Address: localhost
+- Port: 8081
+
+#### Example
+
+The following small example should explain how it works:
+
+initialize a bare repository:
+
+```sh
+cd env/concourse/git-repositories
+git init --bare myrepo.git
+```
+
+and then, just clone it somewhere else:
+
+```sh
+cd /tmp
+git clone http://localhost:8081/myrepo.git
+cd myrepo
+```
+
+### MinIO server
+
+#### General
+
+Minio is an object storage server that contains the same public API as Amazon S3. This means that applications that can interact with Amazon S3, can be configured to interact with Minio in this local environment.
+
+The following docker image is used:
+- minio/minio:RELEASE.2020-05-16T01-33-21Z
+
+#### Usage
+
+- Address: localhost
+- Port: 9000
+- MinIO Access Key: localaccess
+- Minio Secret Key: localsecret
+
+[http://localhost:9000](http://localhost:9000)
+
+#### Example
+
+A good starting point to work with the MinIO server, please read the offical documentation.
+<https://github.com/minio/minio#explore-further>
+
+### docker registry
+
+#### General
+
+If you create your own docker images, you may also need a registry to manage them. The local registry is intended for the development phase, before the generated images are published on services like Docker Hub.
+
+The following docker image is used:
+- registry:2
+
+#### Usage
+
+- Address: localhost
+- Port: 5000
+
+#### Example
+
+A small example explains the sequence.
+
+First we get an official image of the "bash" from Docker Hub.
+
+```sh
+docker pull bash:latest
+```
+
+Then we generate a Test-Tag and push it to our local server.
+
+```sh
+docker tag bash:latest localhost:5000/test_bash
+docker push localhost:5000/test_bash
+```
+
+To check if the created image is available in the local registry, the registry-cleanup tool can be used.
+
+Notes on operation:
+
+```sh
+docker run --rm -it elbb/registry-cleanup -help
+```
+
+Access to the local docker registry using :
+
+```sh
+DOCKER_HOST_IP=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
+docker run --rm -it elbb/registry-cleanup -address http://DOCKER_HOST_IP:5000
+```
 
 # License
 
