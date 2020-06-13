@@ -2,7 +2,8 @@ version: "3.4"
 
 services:
   concourse-db:
-    image: postgres:13
+    container_name: concourse-db
+    image: postgres:${VERSION_POSTGRES:-latest}
     environment:
       POSTGRES_DB: concourse
       POSTGRES_PASSWORD: concourse_pass
@@ -10,43 +11,46 @@ services:
       PGDATA: /database
     volumes:
       - concourse-db-data:/database
-    networks:  
+    networks:
     - default
 
   concourse:
-    image: concourse/concourse:6.1.0
+    container_name: concourse
+    image: concourse/concourse:${VERSION_CONCOURSE:-latest}
     command: quickstart
     privileged: true
     depends_on: [concourse-db]
-    ports: ["8080:8080"]
+    ports: ["${PORT_CONCOURSE:-8080}:8080"]
     environment:
       CONCOURSE_POSTGRES_HOST: concourse-db
       CONCOURSE_POSTGRES_USER: concourse_user
       CONCOURSE_POSTGRES_PASSWORD: concourse_pass
       CONCOURSE_POSTGRES_DATABASE: concourse
-      CONCOURSE_EXTERNAL_URL: http://localhost:8080
+      CONCOURSE_EXTERNAL_URL: http://localhost:${PORT_CONCOURSE:-8080}
       CONCOURSE_ADD_LOCAL_USER: test:test
       CONCOURSE_MAIN_TEAM_LOCAL_USER: test
       CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
       CONCOURSE_CLIENT_SECRET: Y29uY291cnNlLXdlYgo=
       CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
     dns: 8.8.8.8
-    networks:  
+    networks:
       - default
 
   registry:
-    image: registry:2
-    ports: ["5000:5000"]
+    container_name: registry
+    image: registry:${VERSION_REGISTRY:-latest}
+    ports: ["${PORT_REGISTRY:-5000}:5000"]
     environment:
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
     volumes:
-      - registry-data:/data    
-    networks:  
+      - registry-data:/data
+    networks:
     - default
 
   minio:
-    image: minio/minio:RELEASE.2020-05-16T01-33-21Z
-    ports: ["9000:9000"]
+    container_name: minio
+    image: minio/minio:${VERSION_MINIO:-latest}
+    ports: ["${PORT_MINIO:-9000}:9000"]
     tty: true
     command: server /data
     environment:
@@ -54,21 +58,23 @@ services:
       MINIO_SECRET_KEY: localsecret
     volumes:
       - minio-data:/data
-    networks:  
+    networks:
     - default
 
 volumes:
   concourse-db-data:
-    name: "${PROJECT}_${CONCOURSEDBDATA}"
+    name: "${PROJECT:-dev-env-concourse}_${CONCOURSEDBDATA:-concourse-db-data}"
     external: false
 
   minio-data:
-    name: "${PROJECT}_${MINIODATA}"
+    name: "${PROJECT:-dev-env-concourse}_${MINIODATA:-minio-data}"
     external: false
 
   registry-data:
-    name: "${PROJECT}_${REGISTRYDATA}"
-    external: false    
+    name: "${PROJECT:-dev-env-concourse}_${REGISTRYDATA:-registry-data}"
+    external: false
 
 networks:
   default:
+    external:
+      name: ${NETWORK:-elbb-dev}

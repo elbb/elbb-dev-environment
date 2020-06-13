@@ -35,12 +35,6 @@ To set a concourse environment to the default state, this can also be done with 
 
 This environment has a local instance of a concourse CI server.
 
-The following docker image is used:
-- concourse/concourse:6.1.0
-
-For the database, the following docker image is used:
-- postgres:13
-
 #### Usage
 
 The  concourse CI server can be reached via your local browser.
