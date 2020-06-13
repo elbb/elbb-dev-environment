@@ -1,0 +1,39 @@
+# ===================================================
+# mounts
+# ===================================================
+# Note: this mount is used by dobi only to delete the volume.
+# It never gets used by a dobi job.
+# Therefore the path is set to `/unused`
+mount=mount-artifactory-data:
+    name: "{env.PROJECT}_{env.ARTIFACTORYDATA}"
+    path: /unused
+
+# ===================================================
+# compose
+# ===================================================
+compose=dev-env-artifactory-cpp-ce:
+    files: [env/artifactory-cpp-ce/docker-compose.yml]
+    project: "{env.PROJECT}"
+
+# ===================================================
+# alias
+# ===================================================
+
+alias=dev-environment-artifactory-cpp-ce-start:
+    tasks:
+        - dev-env-artifactory-cpp-ce:detach
+    annotations:
+        description: "[alias] start the artifactory-cpp-ce environment"
+
+alias=dev-environment-artifactory-cpp-ce-stop:
+    tasks:
+        - dev-env-artifactory-cpp-ce:down
+    annotations:
+        description: "[alias] stop the artifactory-cpp-ce environment"
+
+alias=dev-environment-artifactory-cpp-ce-clean:
+    tasks:
+        - dev-environment-artifactory-cpp-ce-stop
+        - mount-artifactory-data:rm
+    annotations:
+        description: "[alias] clean the artifactory-cpp-ce environment"
