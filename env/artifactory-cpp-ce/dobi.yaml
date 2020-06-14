@@ -13,7 +13,7 @@ mount=mount-artifactory-data:
 # ===================================================
 compose=dev-env-artifactory-cpp-ce:
     files: [env/artifactory-cpp-ce/docker-compose.yml]
-    project: "{env.PROJECT}"
+    project: "{env.PROJECT}.artifactory-cpp-ce"
 
 # ===================================================
 # alias

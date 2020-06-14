@@ -15,7 +15,7 @@ fi
 # load and export concourse environment env file
 set -o allexport
 source env/global.env
-source env/local.env
+[[ -f env/local.env ]] && source env/local.env
 set +o allexport
 
 set +o errexit
