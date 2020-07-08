@@ -120,7 +120,7 @@ Access to the local docker registry using :
 
 ```sh
 DOCKER_HOST_IP=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
-docker run --rm -it elbb/registry-cleanup -address http://DOCKER_HOST_IP:5000
+docker run --rm -it elbb/registry-cleanup -address http://${DOCKER_HOST_IP}:5000
 ```
 
 # License
