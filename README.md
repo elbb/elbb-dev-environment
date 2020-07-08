@@ -7,7 +7,7 @@ The following section describes the supported environments in detail.
 ## Local concourse CI environment
 
 In this development toolset, there is a concourse CI environment that can be used for local development.
-This environment contains a concourse CI server, a git server, a docker registry and a MinIO server.
+This environment contains a concourse CI server, a docker registry and a MinIO server.
 
 The environment can be started using dobi.
 
@@ -21,7 +21,7 @@ The environment can also be stopped using dobi.
 ./dobi.sh dev-environment-concourse-stop
 ```
 
-When the environment is started, a local folder for the git server and docker volumes for concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the concourse environment.
+When the environment is started, docker volumes for concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the concourse environment.
 
 To set a concourse environment to the default state, this can also be done with dobi.
 
@@ -53,41 +53,6 @@ The  concourse CI server can be reached via your local browser.
 #### Example
 
 [http://localhost:8080](http://localhost:8080)
-
-### git server
-
-#### General
-
-A local git server is located in this environment. This can be used for local version management. This means, that you don't have to upload your own code to a central server, such as GitHub during your development phase.
-
-The git server manages its repositories in the projects folder "env/concourse/git-repositories".
-
-The following docker image is used:
-- cirocosta/gitserver-http:latest
-
-#### Usage
-
-- Address: localhost
-- Port: 8081
-
-#### Example
-
-The following small example should explain how it works:
-
-initialize a bare repository:
-
-```sh
-cd env/concourse/git-repositories
-git init --bare myrepo.git
-```
-
-and then, just clone it somewhere else:
-
-```sh
-cd /tmp
-git clone http://localhost:8081/myrepo.git
-cd myrepo
-```
 
 ### MinIO server
 
