@@ -34,14 +34,6 @@ services:
     networks:  
       - default
 
-  git:
-    image: cirocosta/gitserver-http:latest
-    ports: ["8081:80"]
-    volumes:
-      - ./git-repositories:/var/lib/git
-    networks:  
-    - default
-
   registry:
     image: registry:2
     ports: ["5000:5000"]

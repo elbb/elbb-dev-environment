@@ -16,33 +16,12 @@ mount=mount-registry-data:
     name: "{env.PROJECT}_{env.REGISTRYDATA}"
     path: /unused
 
-mount=mount-git-repositories:
-    bind: env/concourse/git-repositories
-    path: /bind/git-repositories
-
 # ===================================================
 # compose
 # ===================================================
 compose=dev-env-concourse:
     files: [env/concourse/docker-compose.yml]
     project: "{env.PROJECT}"
-
-# ===================================================
-# images
-# ===================================================
-image=image-bash:
-    image: bash
-    tags: ["5"]
-    pull: once
-
-# ===================================================
-# jobs
-# ===================================================
-job=clean-bind-mounts:
-    use: image-bash
-    command: sh -c "rm -rf /bind/git-repositories/*"
-    mounts:
-        - mount-git-repositories
 
 # ===================================================
 # alias
@@ -63,7 +42,6 @@ alias=dev-environment-concourse-stop:
 alias=dev-environment-concourse-clean:
     tasks:
         - dev-environment-concourse-stop
-        - clean-bind-mounts
         - mount-concourse-db:rm
         - mount-minio-data:rm
         - mount-registry-data:rm
