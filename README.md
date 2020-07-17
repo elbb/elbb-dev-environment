@@ -148,6 +148,7 @@ You can reset the "Artifactory ce for C/C++" environment to the default state vi
 
 If you have local port conflicts when using the concourse or artifactory environment, you can adapt these.
 Simply copy `env/local.env.template` to `env/local.env` and adapt `env/local.env` to your needs.
+Furthermore you can configure the used docker network and version of dependencies like concourse etc..
 
 # License
 
