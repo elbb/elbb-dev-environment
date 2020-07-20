@@ -125,7 +125,7 @@ dobi.sh dev-environment-artifactory-cpp-ce-start
 ```
 It can be stopped via
 ```sh
-dobi.sh dev-environment-artifactory-cpp-ce-start
+dobi.sh dev-environment-artifactory-cpp-ce-stop
 ```
 You can reset the "Artifactory ce for C/C++" environment to the default state via
 
@@ -142,7 +142,7 @@ You can reset the "Artifactory ce for C/C++" environment to the default state vi
 
 ### Usage from concourse environment
 
-"Artifactory CE for C/C++" is reachable from within the concourse artifactory via name "artifactory-cpp-ce" with the default ports 8081/8082.
+"Artifactory CE for C/C++" is reachable within a concourse pipeline via name "artifactory-cpp-ce" with the default ports 8081/8082.
 
 ## Configuration/Adaption of your dev environment
 
