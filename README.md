@@ -6,8 +6,7 @@ The following section describes the supported environments in detail.
 
 ## Local concourse CI environment
 
-In this development toolset, there is a concourse CI environment that can be used for local development.
-This environment contains a concourse CI server, a docker registry and a MinIO server.
+This environment contains a concourse CI server, a docker registry and a MinIO server that canbe used for local development.
 
 The environment can be started using dobi.
 
@@ -34,12 +33,6 @@ To set a concourse environment to the default state, this can also be done with 
 #### General
 
 This environment has a local instance of a concourse CI server.
-
-The following docker image is used:
-- concourse/concourse:6.1.0
-
-For the database, the following docker image is used:
-- postgres:13
 
 #### Usage
 
@@ -122,6 +115,40 @@ Access to the local docker registry using :
 DOCKER_HOST_IP=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
 docker run --rm -it elbb/registry-cleanup -address http://${DOCKER_HOST_IP}:5000
 ```
+
+## Local (Conan) Artifactory Community Edition for C/C++
+
+If you want to use or deploy your own conan packages in your concourse pipeline you need a reachable "Artifactory Community Edition for C/C++". This Toolset contains a preprovisioned one with default credentials. Don't use it for production purposes!
+You can start the local "Artifactory Community Edition for C/C++" via
+```sh
+dobi.sh dev-environment-artifactory-cpp-ce-start
+```
+It can be stopped via
+```sh
+dobi.sh dev-environment-artifactory-cpp-ce-start
+```
+You can reset the "Artifactory ce for C/C++" environment to the default state via
+
+```sh
+./dobi.sh dev-environment-artifactory-cpp-ce-clean
+```
+
+### Usage
+
+- Address: localhost
+- Ports: 8081 (REST API), 8082 (UI + all other product APIs)
+- User Name: admin
+- User PW: password
+
+### Usage from concourse environment
+
+"Artifactory CE for C/C++" is reachable from within the concourse artifactory via name "artifactory-cpp-ce" with the default ports 8081/8082.
+
+## Configuration/Adaption of your dev environment
+
+If you have local port conflicts when using the concourse or artifactory environment, you can adapt these.
+Simply copy `env/local.env.template` to `env/local.env` and adapt `env/local.env` to your needs.
+Furthermore you can configure the used docker network and version of dependencies like concourse etc..
 
 # License
 

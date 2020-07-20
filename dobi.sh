@@ -14,8 +14,13 @@ fi
 
 # load and export concourse environment env file
 set -o allexport
-source env/concourse/local.env
+source env/global.env
+[[ -f env/local.env ]] && source env/local.env
 set +o allexport
+
+set +o errexit
+docker network create ${NETWORK:-elbb-dev} &>/dev/null
+set -o errexit
 
 # execute dobi with meta as default
 exec dobi --filename meta.yaml ${@}

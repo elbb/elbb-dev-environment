@@ -8,6 +8,7 @@ meta:
     - dobi.yaml
     - version.yaml
     - env/concourse/dobi.yaml
+    - env/artifactory-cpp-ce/dobi.yaml
 
 # ===================================================
 # alias

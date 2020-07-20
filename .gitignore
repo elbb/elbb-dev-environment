@@ -1,3 +1,6 @@
+#local environment config
+env/local.env
+
 #general
 build
 gen
