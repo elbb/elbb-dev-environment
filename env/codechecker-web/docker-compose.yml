@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  codechecker-web:
+    container_name: codechecker-web
+    image: codechecker/codechecker-web:${VERSION_CODECHECKER_WEB:-latest}
+    ports: ["${PORT_CODECHECKER_WEB:-8001}:8001"]
+    volumes:
+      - codechecker-web-data:/workspace
+    networks:  
+      - default
+
+volumes:
+  codechecker-web-data:
+    name: "${PROJECT}_${CODECHECKERWEBDATA:-codechecker-web-data}"
+    external: false
+
+networks:
+  default:
+    external:
+      name: ${NETWORK:-elbb-dev}

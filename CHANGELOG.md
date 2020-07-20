@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ports are now configurable via env/local.env
 - versions of dependencies are now configurable via env/local.env
 - the used docker network is now configurable via env/local.env
+- added codechecker web server
 
 ## [0.1.0] - 2020-06-02
 

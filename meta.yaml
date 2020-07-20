@@ -9,6 +9,7 @@ meta:
     - version.yaml
     - env/concourse/dobi.yaml
     - env/artifactory-cpp-ce/dobi.yaml
+    - env/codechecker-web/dobi.yaml
 
 # ===================================================
 # alias

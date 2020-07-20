@@ -61,14 +61,6 @@ services:
     networks:
     - default
 
-  codechecker-web:
-    image: codechecker/codechecker-web:6.12.1
-    ports: ["8001:8001"]
-    volumes:
-      - codechecker-web-data:/workspace
-    networks:  
-      - default
-
 volumes:
   concourse-db-data:
     name: "${PROJECT:-dev-env-concourse}_${CONCOURSEDBDATA:-concourse-db-data}"
@@ -80,10 +72,6 @@ volumes:
 
   registry-data:
     name: "${PROJECT:-dev-env-concourse}_${REGISTRYDATA:-registry-data}"
-    external: false
-
-  codechecker-web-data:
-    name: "${PROJECT}_${CODECHECKERWEB}"
     external: false
 
 networks:

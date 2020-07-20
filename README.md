@@ -144,6 +144,32 @@ You can reset the "Artifactory ce for C/C++" environment to the default state vi
 
 "Artifactory CE for C/C++" is reachable from within the concourse artifactory via name "artifactory-cpp-ce" with the default ports 8081/8082.
 
+## Codechecker
+
+ If you like to store and view your static code analysies reports from "Clang Tidy" and "Clang Static Analyzer", you can use the Codechecker web server.
+
+ You can start the local "Codechecker web server" via
+
+```sh
+dobi.sh dev-environment-codechecker-web-start
+```
+It can be stopped via
+```sh
+dobi.sh dev-environment-codechecker-web-stop
+```
+You can reset the "Codechecker Web Server" environment to the default state via
+
+```sh
+./dobi.sh dev-environment-codechecker-web-clean
+```
+
+### Usage
+
+- Address: localhost
+- port: 8001
+
+[http://localhost:8001](http://localhost:8001)
+
 ## Configuration/Adaption of your dev environment
 
 If you have local port conflicts when using the concourse or artifactory environment, you can adapt these.

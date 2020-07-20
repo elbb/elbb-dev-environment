@@ -1,0 +1,39 @@
+# ===================================================
+# mounts
+# ===================================================
+# Note: this mount is used by dobi only to delete the volume.
+# It never gets used by a dobi job.
+# Therefore the path is set to `/unused`
+mount=mount-codechecker-web:
+    name: "{env.PROJECT}_{env.CODECHECKERWEBDATA}"
+    path: /unused
+
+# ===================================================
+# compose
+# ===================================================
+compose=dev-env-codechecker-web:
+    files: [env/codechecker-web/docker-compose.yml]
+    project: "{env.PROJECT}.codechecker-web"
+
+# ===================================================
+# alias
+# ===================================================
+
+alias=dev-environment-codechecker-web-start:
+    tasks:
+        - dev-env-codechecker-web:detach
+    annotations:
+        description: "[alias] start the codechecker-web environment"
+
+alias=dev-environment-codechecker-web-stop:
+    tasks:
+        - dev-env-codechecker-web:down
+    annotations:
+        description: "[alias] stop the codechecker-web environment"
+
+alias=dev-environment-codechecker-web-clean:
+    tasks:
+        - dev-environment-codechecker-web-stop
+        - mount-codechecker-web:rm
+    annotations:
+        description: "[alias] clean the codechecker-web environment"
