@@ -53,9 +53,6 @@ The  concourse CI server can be reached via your local browser.
 
 Minio is an object storage server that contains the same public API as Amazon S3. This means that applications that can interact with Amazon S3, can be configured to interact with Minio in this local environment.
 
-The following docker image is used:
-- minio/minio:RELEASE.2020-05-16T01-33-21Z
-
 #### Usage
 
 - Address: localhost
@@ -75,9 +72,6 @@ A good starting point to work with the MinIO server, please read the offical doc
 #### General
 
 If you create your own docker images, you may also need a registry to manage them. The local registry is intended for the development phase, before the generated images are published on services like Docker Hub.
-
-The following docker image is used:
-- registry:2
 
 #### Usage
 
@@ -143,6 +137,32 @@ You can reset the "Artifactory ce for C/C++" environment to the default state vi
 ### Usage from concourse environment
 
 "Artifactory CE for C/C++" is reachable within a concourse pipeline via name "artifactory-cpp-ce" with the default ports 8081/8082.
+
+## Codechecker
+
+ If you like to store and view your static code analysies reports from "Clang Tidy" and "Clang Static Analyzer", you can use the Codechecker web server.
+
+ You can start the local "Codechecker web server" via
+
+```sh
+dobi.sh dev-environment-codechecker-web-start
+```
+It can be stopped via
+```sh
+dobi.sh dev-environment-codechecker-web-stop
+```
+You can reset the "Codechecker Web Server" environment to the default state via
+
+```sh
+./dobi.sh dev-environment-codechecker-web-clean
+```
+
+### Usage
+
+- Address: localhost
+- port: 8001
+
+[http://localhost:8001](http://localhost:8001)
 
 ## Configuration/Adaption of your dev environment
 
