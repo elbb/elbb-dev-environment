@@ -10,18 +10,15 @@ services:
     volumes:
       - "artifactory-cpp-ce-data:/var/opt/jfrog/artifactory"
       - "./:/config/:ro"
-    entrypoint: 
+    entrypoint:
       sh -c "cd /var/opt/jfrog/artifactory/etc/artifactory \
       ; bash -c '[[ ! -f artifactory.config.bootstrap.xml ]] && cp /config/artifactory.config.import.xml ./' \
-      ; /entrypoint-artifactory.sh" 
+      ; /entrypoint-artifactory.sh"
     networks:
       - default
 
 volumes:
   artifactory-cpp-ce-data:
-    name: "${PROJECT}_${ARTIFACTORYDATA:-artifactory-cpp-ce-data}"
-    external: false
-  artifactory-cpp-ce-etc:
     name: "${PROJECT}_${ARTIFACTORYDATA:-artifactory-cpp-ce-data}"
     external: false
 
