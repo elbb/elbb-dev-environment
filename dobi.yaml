@@ -1,9 +1,0 @@
-# ===================================================
-# alias
-# ===================================================
-
-alias=dev-environment-version:
-  tasks:
-  - buildingblock-version
-  annotations:
-    description: "->[alias] generate version informations"

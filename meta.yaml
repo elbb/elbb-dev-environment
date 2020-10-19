@@ -5,16 +5,7 @@
 meta:
   project: dev-environment
   include:
-    - dobi.yaml
     - version.yaml
     - env/concourse/dobi.yaml
     - env/artifactory-cpp-ce/dobi.yaml
     - env/codechecker-web/dobi.yaml
-
-# ===================================================
-# alias
-# ===================================================
-
-alias=version:
-  tasks:
-    - dev-environment-version

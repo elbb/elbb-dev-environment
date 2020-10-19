@@ -1,5 +1,5 @@
 #local environment config
-env/local.env
+local.env
 
 #general
 build
