@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `dobi.sh`: parameter checking and handling for `dobi` target `list` and `dobi.sh` target `version`
 - added email notification on error in `concourse` pipeline
 - version bump of concourse to 6.6.0
+- configurable restart policy for all containers
 
 ## [0.3.2] 2020.Q3
 

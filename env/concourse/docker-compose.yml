@@ -13,6 +13,7 @@ services:
       - concourse-db-data:/database
     networks:
     - default
+    restart: ${RESTART_POSTGRES}
 
   concourse:
     container_name: concourse
@@ -35,6 +36,7 @@ services:
     dns: 8.8.8.8
     networks:
       - default
+    restart: ${RESTART_CONCOURSE}
 
   registry:
     container_name: registry
@@ -46,6 +48,7 @@ services:
       - registry-data:/data
     networks:
     - default
+    restart: ${RESTART_REGISTRY}
 
   minio:
     container_name: minio
@@ -60,6 +63,7 @@ services:
       - minio-data:/data
     networks:
     - default
+    restart: ${RESTART_MINIO}
 
 volumes:
   concourse-db-data:

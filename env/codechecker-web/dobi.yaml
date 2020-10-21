@@ -19,21 +19,21 @@ compose=dev-env-codechecker-web:
 # alias
 # ===================================================
 
-alias=dev-environment-codechecker-web-start:
+alias=codechecker-web-start:
     tasks:
         - dev-env-codechecker-web:detach
     annotations:
-        description: "[alias] start the codechecker-web environment"
+        description: "-> start the codechecker-web environment"
 
-alias=dev-environment-codechecker-web-stop:
+alias=codechecker-web-stop:
     tasks:
         - dev-env-codechecker-web:down
     annotations:
-        description: "[alias] stop the codechecker-web environment"
+        description: "-> stop the codechecker-web environment"
 
-alias=dev-environment-codechecker-web-clean:
+alias=codechecker-web-clean:
     tasks:
-        - dev-environment-codechecker-web-stop
+        - codechecker-web-stop
         - mount-codechecker-web:rm
     annotations:
-        description: "[alias] clean the codechecker-web environment"
+        description: "-> clean the codechecker-web environment"
