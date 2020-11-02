@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added `default.env`, `local.env.template` and doku how to use it -> enables setting default and local environment variables for `dobi` targets
 - `dobi.sh` downloads `dobi` if `dobi` is not `$PATH`
 - `dobi.sh`: parameter checking and handling for `dobi` target `list` and `dobi.sh` target `version`
-- added email notification on error in `concourse` pipeline
 - version bump of concourse to 6.6.0
 - configurable restart policy for all containers
 
