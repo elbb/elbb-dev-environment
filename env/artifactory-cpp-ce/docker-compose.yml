@@ -16,6 +16,7 @@ services:
       ; /entrypoint-artifactory.sh"
     networks:
       - default
+    restart: ${RESTART_ARTIFACTORY_CPP_DE}
 
 volumes:
   artifactory-cpp-ce-data:

@@ -19,21 +19,21 @@ compose=dev-env-artifactory-cpp-ce:
 # alias
 # ===================================================
 
-alias=dev-environment-artifactory-cpp-ce-start:
+alias=artifactory-cpp-ce-start:
     tasks:
         - dev-env-artifactory-cpp-ce:detach
     annotations:
-        description: "[alias] start the artifactory-cpp-ce environment"
+        description: "-> start the artifactory-cpp-ce environment"
 
-alias=dev-environment-artifactory-cpp-ce-stop:
+alias=artifactory-cpp-ce-stop:
     tasks:
         - dev-env-artifactory-cpp-ce:down
     annotations:
-        description: "[alias] stop the artifactory-cpp-ce environment"
+        description: "-> stop the artifactory-cpp-ce environment"
 
-alias=dev-environment-artifactory-cpp-ce-clean:
+alias=artifactory-cpp-ce-clean:
     tasks:
-        - dev-environment-artifactory-cpp-ce-stop
+        - artifactory-cpp-ce-stop
         - mount-artifactory-data:rm
     annotations:
-        description: "[alias] clean the artifactory-cpp-ce environment"
+        description: "-> clean the artifactory-cpp-ce environment"

@@ -1,8 +1,11 @@
 <img src="https://raw.githubusercontent.com/elbb/bb-buildingblock/master/.assets/logo.png" height="200">
 
-# Local development environment
+# (e)mbedded (l)inux (b)uilding (b)locks - local development environment
 
-The following section describes the supported environments in detail.
+## Prerequisites
+
+-   [docker](https://docs.docker.com/install/)
+-   [dobi](https://github.com/dnephin/dobi) (downloaded if not in `PATH`)
 
 ## Local concourse CI environment
 
@@ -167,7 +170,9 @@ You can reset the "Codechecker Web Server" environment to the default state via
 ## Configuration/Adaption of your dev environment
 
 If you have local port conflicts when using the concourse or artifactory environment, you can adapt these.
-Simply copy `env/local.env.template` to `env/local.env` and adapt `env/local.env` to your needs.
+Copy `./local.env.template` to `./local.env` and edit `./local.env` accordingly.<br>
+`./local.env` is ignored by git via `./.gitignore`.
+
 Furthermore you can configure the used docker network and version of dependencies like concourse etc..
 
 # License

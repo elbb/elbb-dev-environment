@@ -27,23 +27,23 @@ compose=dev-env-concourse:
 # alias
 # ===================================================
 
-alias=dev-environment-concourse-start:
+alias=concourse-start:
     tasks:
         - dev-env-concourse:detach
     annotations:
-        description: "[alias] start the concourse environment"
+        description: "-> start the concourse environment"
 
-alias=dev-environment-concourse-stop:
+alias=concourse-stop:
     tasks:
         - dev-env-concourse:down
     annotations:
-        description: "[alias] stop the concourse environment"
+        description: "-> stop the concourse environment"
 
-alias=dev-environment-concourse-clean:
+alias=concourse-clean:
     tasks:
-        - dev-environment-concourse-stop
+        - concourse-stop
         - mount-concourse-db:rm
         - mount-minio-data:rm
         - mount-registry-data:rm
     annotations:
-        description: "[alias] clean the concourse environment"
+        description: "-> clean the concourse environment"
