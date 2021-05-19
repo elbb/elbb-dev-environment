@@ -6,9 +6,9 @@
 This repository contains tools, services and information which might be helpful or needed to develop software in elbb context:
 - [Local concourse CI environment](#local-concourse-ci-environment)
   - [concourse CI server](#concourse-ci-server)
-  - [MinIO server](#minio-server)
-  - [Docker Registry](#docker-registry)
-- [Local (Conan) Artifactory](#local-conan-artifactory-community-edition-for)
+  - [minio server](#minio-server)
+  - [docker registry](#docker-registry)
+- [Local (conan) artifactory](#local-conan-artifactory-community-edition-for-cc)
 - [Codechecker](#codechecker)
 
 ## Prerequisites
