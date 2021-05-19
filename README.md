@@ -4,9 +4,9 @@
 
 ## Generel
 This repository contains tools, services and information which might be helpful or needed to develop software in elbb context:
-- [Local concourse CI environment](#local-concourse-ci-environment)
-  - [concourse CI server](#concourse-ci-server)
-  - [minio server](#minio-server)
+- [Local Concourse CI environment](#local-concourse-ci-environment)
+  - [Concourse CI server](#concourse-ci-server)
+  - [MinIO server](#minio-server)
   - [docker registry](#docker-registry)
 - [Local (conan) artifactory](#local-conan-artifactory-community-edition-for-cc)
 - [Codechecker](#codechecker)
@@ -16,9 +16,9 @@ This repository contains tools, services and information which might be helpful 
 -   [docker](https://docs.docker.com/install/)
 -   [dobi](https://github.com/dnephin/dobi) (downloaded if not in `PATH`)
 
-## Local concourse CI environment
+## Local Concourse CI environment
 
-This environment contains a concourse CI server, a docker registry and a MinIO server that can be used for local development.
+This environment contains a Concourse CI server, a docker registry and a MinIO server that can be used for local development.
 
 The environment can be started using dobi.
 
@@ -32,15 +32,15 @@ The environment can also be stopped using dobi.
 ./dobi.sh dev-environment-concourse-stop
 ```
 
-When the environment is started, docker volumes for concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the concourse environment.
+When the environment is started, docker volumes for Concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the Concourse environment.
 
-To set a concourse environment to the default state, this can also be done with dobi.
+To set a Concourse environment to the default state, this can also be done with dobi.
 
 ```sh
 ./dobi.sh dev-environment-concourse-clean
 ```
 
-### concourse CI server
+### Concourse CI server
 
 #### General
 
@@ -48,7 +48,7 @@ This environment has a local instance of a concourse CI server.
 
 #### Usage
 
-The  concourse CI server can be reached via your local browser.
+The  Concourse CI server can be reached via your local browser.
 
 - Address: localhost
 - Port: 8080
