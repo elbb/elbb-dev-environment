@@ -2,6 +2,12 @@
 
 # (e)mbedded (l)inux (b)uilding (b)locks - local development environment
 
+## Generel
+This repository contains tools and services which might be helpful or needed to develop software in elbb context:
+- [Local concourse CI environment](#local-concourse-ci-environment)
+- [MinIO server](#minio-server)
+- 
+
 ## Prerequisites
 
 -   [docker](https://docs.docker.com/install/)
