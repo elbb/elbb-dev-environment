@@ -21,22 +21,19 @@ This repository contains tools, services and information which might be helpful 
 
 This environment contains a Concourse CI server, a docker registry and a MinIO server that can be used for local development.
 
-The environment can be started using dobi.
-
+The environment can be started using dobi:
 ```sh
-./dobi.sh dev-environment-concourse-start
+./dobi.sh dev-environment-concourse-start ?????
 ```
 
-The environment can also be stopped using dobi.
-
+The environment can also be stopped using dobi:
 ```sh
 ./dobi.sh dev-environment-concourse-stop
 ```
 
 When the environment is started, docker volumes for Concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the Concourse environment.
 
-To set a Concourse environment to the default state, this can also be done with dobi.
-
+To set a Concourse environment to the default state, this can also be done with dobi:
 ```sh
 ./dobi.sh dev-environment-concourse-clean
 ```
@@ -102,7 +99,6 @@ docker pull bash:latest
 ```
 
 Then we generate a Test-Tag and push it to our local server.
-
 ```sh
 docker tag bash:latest localhost:5000/test_bash
 docker push localhost:5000/test_bash
@@ -111,13 +107,11 @@ docker push localhost:5000/test_bash
 To check if the created image is available in the local registry, the registry-cleanup tool can be used.
 
 Notes on operation:
-
 ```sh
 docker run --rm -it elbb/registry-cleanup -help
 ```
 
 Access to the local docker registry using :
-
 ```sh
 DOCKER_HOST_IP=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
 docker run --rm -it elbb/registry-cleanup -address http://${DOCKER_HOST_IP}:5000
