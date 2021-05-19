@@ -13,7 +13,7 @@ This repository contains tools, services and information which might be helpful 
 
 ## Prerequisites
 
--   [docker](https://docs.docker.com/install/)
+-   [docker](https://docs.docker.com/install/) and [docker compose](https://docs.docker.com/compose/install/)
 -   [dobi](https://github.com/dnephin/dobi) (downloaded if not in `PATH`)
 
 ## Local Concourse CI environment
@@ -127,11 +127,11 @@ docker run --rm -it elbb/registry-cleanup -address http://${DOCKER_HOST_IP}:5000
 If you want to use or deploy your own conan packages in your concourse pipeline you need a reachable "Artifactory Community Edition for C/C++". This Toolset contains a preprovisioned one with default credentials. Don't use it for production purposes!
 You can start the local "Artifactory Community Edition for C/C++" via
 ```sh
-dobi.sh dev-environment-artifactory-cpp-ce-start
+./dobi.sh dev-environment-artifactory-cpp-ce-start
 ```
 It can be stopped via
 ```sh
-dobi.sh dev-environment-artifactory-cpp-ce-stop
+./dobi.sh dev-environment-artifactory-cpp-ce-stop
 ```
 You can reset the "Artifactory ce for C/C++" environment to the default state via
 
