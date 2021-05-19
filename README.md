@@ -3,10 +3,13 @@
 # (e)mbedded (l)inux (b)uilding (b)locks - local development environment
 
 ## Generel
-This repository contains tools and services which might be helpful or needed to develop software in elbb context:
+This repository contains tools, services and information which might be helpful or needed to develop software in elbb context:
 - [Local concourse CI environment](#local-concourse-ci-environment)
-- [MinIO server](#minio-server)
-- 
+  - [concourse CI server](#concourse-ci-server)
+  - [MinIO server](#minio-server)
+  - [Docker Registry](#docker-registry)
+- [Local (Conan) Artifactory](#local-conan-artifactory-community-edition-for)
+- [Codechecker](#codechecker)
 
 ## Prerequisites
 
@@ -15,7 +18,7 @@ This repository contains tools and services which might be helpful or needed to 
 
 ## Local concourse CI environment
 
-This environment contains a concourse CI server, a docker registry and a MinIO server that canbe used for local development.
+This environment contains a concourse CI server, a docker registry and a MinIO server that can be used for local development.
 
 The environment can be started using dobi.
 
