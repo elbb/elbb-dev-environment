@@ -13,8 +13,9 @@ This repository contains tools, services and information which might be helpful 
 
 ## Prerequisites
 
--   [docker](https://docs.docker.com/install/) and [docker compose](https://docs.docker.com/compose/install/)
--   [dobi](https://github.com/dnephin/dobi) (downloaded if not in `PATH`)
+-   [docker](https://docs.docker.com/install/)
+-   [docker compose](https://docs.docker.com/compose/install/)
+-   [dobi](https://github.com/dnephin/dobi) (downloaded and installed automatically by first usage of dobi.sh if not already in `PATH`)
 
 ## Local Concourse CI environment
 
@@ -125,18 +126,17 @@ docker run --rm -it elbb/registry-cleanup -address http://${DOCKER_HOST_IP}:5000
 ## Local (Conan) Artifactory Community Edition for C/C++
 
 If you want to use or deploy your own conan packages in your concourse pipeline you need a reachable "Artifactory Community Edition for C/C++". This Toolset contains a preprovisioned one with default credentials. Don't use it for production purposes!
-You can start the local "Artifactory Community Edition for C/C++" via
+You can start the local "Artifactory Community Edition for C/C++" from the root directory via
 ```sh
-./dobi.sh dev-environment-artifactory-cpp-ce-start
+./dobi.sh artifactory-cpp-ce-start
 ```
 It can be stopped via
 ```sh
-./dobi.sh dev-environment-artifactory-cpp-ce-stop
+./dobi.sh artifactory-cpp-ce-stop
 ```
 You can reset the "Artifactory ce for C/C++" environment to the default state via
-
 ```sh
-./dobi.sh dev-environment-artifactory-cpp-ce-clean
+./dobi.sh artifactory-cpp-ce-clean
 ```
 
 ### Usage
