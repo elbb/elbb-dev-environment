@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/elbb/bb-buildingblock/master/.assets/logo.png" height="200">
 
-# (e)mbedded (l)inux (b)uilding (b)locks - local development environment
+# (e)mbedded (l)inux (b)uilding (b)locks - development environment
 
 ## Generel
 This repository contains tools, services and information which might be helpful or needed to develop software in elbb context:
@@ -15,7 +15,7 @@ This repository contains tools, services and information which might be helpful 
 
 -   [docker](https://docs.docker.com/install/)
 -   [docker compose](https://docs.docker.com/compose/install/)
--   [dobi](https://github.com/dnephin/dobi) (downloaded and installed automatically by first usage of dobi.sh if not already in `PATH`)
+-   [dobi](https://github.com/dnephin/dobi): **Always use dobi.sh from root of this directory**. If dobi isn't installed or not in `PATH` yet it will be downloaded and installed automatically by first usage of dobi.sh.
 
 ## Local Concourse CI environment
 
@@ -23,19 +23,19 @@ This environment contains a Concourse CI server, a docker registry and a MinIO s
 
 The environment can be started using dobi:
 ```sh
-./dobi.sh dev-environment-concourse-start ?????
+./dobi.sh concourse-start
 ```
 
 The environment can also be stopped using dobi:
 ```sh
-./dobi.sh dev-environment-concourse-stop
+./dobi.sh concourse-stop
 ```
 
 When the environment is started, docker volumes for Concourse database, MinIO and docker registry are created and used by these services. This has the advantage, that the history is kept after a restart of the Concourse environment.
 
 To set a Concourse environment to the default state, this can also be done with dobi:
 ```sh
-./dobi.sh dev-environment-concourse-clean
+./dobi.sh concourse-clean
 ```
 
 ### Concourse CI server
@@ -120,7 +120,7 @@ docker run --rm -it elbb/registry-cleanup -address http://${DOCKER_HOST_IP}:5000
 ## Local (Conan) Artifactory Community Edition for C/C++
 
 If you want to use or deploy your own conan packages in your concourse pipeline you need a reachable "Artifactory Community Edition for C/C++". This Toolset contains a preprovisioned one with default credentials. Don't use it for production purposes!
-You can start the local "Artifactory Community Edition for C/C++" from the root directory via
+You can start the local "Artifactory Community Edition for C/C++" via
 ```sh
 ./dobi.sh artifactory-cpp-ce-start
 ```
@@ -151,16 +151,16 @@ You can reset the "Artifactory ce for C/C++" environment to the default state vi
  You can start the local "Codechecker web server" via
 
 ```sh
-dobi.sh dev-environment-codechecker-web-start
+dobi.sh codechecker-web-start
 ```
 It can be stopped via
 ```sh
-dobi.sh dev-environment-codechecker-web-stop
+dobi.sh codechecker-web-stop
 ```
 You can reset the "Codechecker Web Server" environment to the default state via
 
 ```sh
-./dobi.sh dev-environment-codechecker-web-clean
+./dobi.sh codechecker-web-clean
 ```
 
 ### Usage
